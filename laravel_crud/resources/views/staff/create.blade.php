@@ -13,24 +13,28 @@
                         </h4>
                     </div>
                     <div class="card-body">
-                        <form  method="POST">
-                            @csrf
-
+                    <form action="{{ route('staff.store') }}" method="POST">                            
+                        @csrf
+                        @method('post')
                             <div class="mb-3">
                                 <label>Name</label>
                                 <input type="text" name="name" class="form-control" />
+                                @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="mb-3">
                                 <label>Address</label>
-                                <input type="text" name="name" class="form-control" />
+                                <input type="text" name="address" class="form-control" />
+                                @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="mb-3">
                                 <label>Position</label>
-                                <input type="text" name="name" class="form-control" />
+                                <input type="text" name="position" class="form-control" />
+                                @error('position') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="mb-3">
                                 <label>Phone</label>
-                                <input type="number" name="number" class="form-control" />
+                                <input type="number" name="phone" class="form-control" />
+                                @error('phone') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                            
                             
