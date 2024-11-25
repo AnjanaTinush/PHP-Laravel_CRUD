@@ -30,8 +30,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
-                                
+                            @foreach ($staffs as $staff)
+                            <tr>
+                            <td>{{ $staff->id }}</td>
+                            <td>{{ $staff->name }}</td>
+                            <td>{{ $staff->address }}</td>
+                            <td>{{ $staff->position }}</td>
+                            <td>{{ $staff->phone }}</td>
+                         </tr>
+                         @endforeach
                             </tbody>
                         </table>
 

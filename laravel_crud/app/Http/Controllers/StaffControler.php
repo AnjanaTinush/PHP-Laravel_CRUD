@@ -9,7 +9,9 @@ class StaffControler extends Controller
 {
     public function index()
     {
-        return view('staff.index');
+        $staff=staff_ :: all ();
+        return view('staff.index',['staffs'=>$staff]);
+
     }
 
     public function create()
