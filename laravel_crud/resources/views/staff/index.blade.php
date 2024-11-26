@@ -5,12 +5,13 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-
                 
+                <br></br>
+                @session('status')
                 <div class="alert alert-success">
-                   
+                 {{session('status')}}  
                 </div>
-                
+                @endsession
 
                 <div class="card">
                     <div class="card-header">
@@ -39,7 +40,7 @@
                             <td>{{ $staff->position }}</td>
                             <td>{{ $staff->phone }}</td>
                             <td class="d-flex justify-content-center align-items-center">
-    <a href="{{ route('staff.edit',['staff' => $staff]) }}" class="btn btn-success me-4">Edit</a>
+    <a href="{{ route('staff.edit',['staff' => $staff]) }}" class="btn btn-success me-4 row-2">Edit</a>
     <form action="{{route('staff.destroy',['staff'=> $staff])}}" method="POST" class="d-inline">
         @csrf
         @method('DELETE')

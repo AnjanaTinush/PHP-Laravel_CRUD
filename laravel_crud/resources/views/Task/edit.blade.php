@@ -31,15 +31,24 @@
                                 <textarea name="description" rows="3" class="form-control" >{{$task->description}}</textarea>
                                 @error('description') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
-                            <div class="mb-3">
-                                <label>Assign staff</label>
-                                <input type="number" name="staff_id" class="form-control"  value="{{$task->staff_id}}"/>
-                                @error('staff_id') <span class="text-danger">{{ $message }}</span> @enderror
-                            </div>
+                              <!-- Dropdown to select staff -->
+                              <div class="mb-3">
+    <label for="staff_id" class="form-label">Select Staff Member</label>
+    <select name="staff_id" id="staff_id" class="form-select">
+        <option value="">Select Staff ID</option>
+        @foreach($staffMembers as $staff)
+            <option value="{{ $staff->id }}" {{ $task->staff_id == $staff->id ? 'selected' : '' }}>
+                {{ $staff->name }} (Staff ID: {{ $staff->id }})
+            </option>
+        @endforeach
+    </select>
+    @error('staff_id') <span class="text-danger">{{ $message }}</span> @enderror
+</div>
+
                            
                             
                             <div class="mb-3">
-                                <button type="submit" class="btn btn-primary">Update</button>
+                                <button type="submit" class="btn btn-primary col-1">Update</button>
                             </div>
 
                         </form>

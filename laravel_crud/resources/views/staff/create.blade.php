@@ -33,7 +33,7 @@
                             </div>
                             <div class="mb-3">
                                 <label>Phone</label>
-                                <input type="number" name="phone" class="form-control" />
+                                <input type="number" name="phone" class="form-control" max=10 />
                                 @error('phone') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                            

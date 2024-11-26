@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Task; // Correct import
 use Illuminate\Http\Request;
+use App\Models\Staff_; // Import the Staff model
 
 class TaskControler extends Controller
 {
@@ -16,30 +17,37 @@ class TaskControler extends Controller
 
     public function create()
     {
-        return view('task.create');
+        // Fetch all staff members
+        $staffMembers = Staff_::all();
+
+        // Pass staff members to the view
+        return view('task.create', compact('staffMembers'));
     }
 
     public function store(Request $request)
     {
+        // Validate and store the task data
         $data = $request->validate([
             'name' => 'required',
             'finaldate' => 'required',
             'description' => 'required',
-            'staff_id' => 'required|numeric',
+            'staff_id' => 'required',
         ]);
 
-        // Use the correct model name
-        $newTask = task::create($data);
+        Task::create($data);
 
-        return redirect(route('task.index'));
-
+        return redirect(route('task.index'))->with('status','Task Created Successfully');;
     }
 
-    public function edit(task $task)
+    public function edit(Task $task)
     {
-        return view('task.edit',['task'=>$task]);
+        // Fetch all staff members
+        $staffMembers = Staff_::all();
+    
+        // Pass both task and staff members to the view
+        return view('task.edit', compact('task', 'staffMembers'));
     }
-
+    
     public function update(task $task ,Request $request)
     {
         $data = $request->validate([

@@ -6,10 +6,13 @@
         <div class="row">
             <div class="col-md-12">
 
-                
+            <br></br>
+            @session('status')
                 <div class="alert alert-success">
-                   
+                 {{session('status')}}  
                 </div>
+                @endsession
+
                 
 
                 <div class="card">

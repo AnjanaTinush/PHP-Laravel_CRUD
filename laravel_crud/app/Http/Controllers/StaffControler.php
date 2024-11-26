@@ -31,7 +31,7 @@ class StaffControler extends Controller
         // Use the correct model name
         $newstaff = staff_::create($data);
 
-        return redirect(route('staff.index'));
+        return redirect(route('staff.index'))->with('status','Staff added Successfully');;
     }
 
     public function show(staff_ $staff)
@@ -50,7 +50,7 @@ class StaffControler extends Controller
             'name' => 'required',
             'address' => 'required',
             'position' => 'required',
-            'phone' => 'required|numeric',
+            'phone' => 'required',
         ]);    
         
         $staff -> update($data);

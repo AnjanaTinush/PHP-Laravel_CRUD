@@ -16,5 +16,11 @@ class Task extends Model
         'finaldate',
         'description',
         'staff_id',
-    ];   
+    ];  
+    
+     // Define the relationship with the staff_ model (assuming "staff_id" is the foreign key)
+     public function staff()
+     {
+         return $this->belongsTo(Staff_::class, 'staff_id');
+     }
 }
