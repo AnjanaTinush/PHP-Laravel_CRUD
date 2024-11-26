@@ -40,7 +40,7 @@
                             <td>{{ $staff->phone }}</td>
                             <td class="d-flex justify-content-center align-items-center">
     <a href="{{ route('staff.edit',['staff' => $staff]) }}" class="btn btn-success me-4">Edit</a>
-    <form action="{{ url('staff/' . $staff->id) }}" method="POST" class="d-inline">
+    <form action="{{route('staff.destroy',['staff'=> $staff])}}" method="POST" class="d-inline">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-danger">Delete</button>

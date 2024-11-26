@@ -57,4 +57,10 @@ class StaffControler extends Controller
 
         return redirect(route('staff.index'))->with('success','Staff updated successfully');
     }
+
+    public function destroy(staff_ $staff){
+        $staff -> delete();
+        return redirect(route('staff.index'))->with('success','Staff deleted successfully');
+
+    }
 }
