@@ -27,6 +27,7 @@
                                     <th>Address</th>
                                     <th>Position</th>
                                     <th>Phone</th>
+                                    <th class="d-flex justify-content-center align-items-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -37,6 +38,15 @@
                             <td>{{ $staff->address }}</td>
                             <td>{{ $staff->position }}</td>
                             <td>{{ $staff->phone }}</td>
+                            <td class="d-flex justify-content-center align-items-center">
+    <a href="{{ route('staff.edit',['staff' => $staff]) }}" class="btn btn-success me-4">Edit</a>
+    <form action="{{ url('staff/' . $staff->id) }}" method="POST" class="d-inline">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+</td>
+
                          </tr>
                          @endforeach
                             </tbody>

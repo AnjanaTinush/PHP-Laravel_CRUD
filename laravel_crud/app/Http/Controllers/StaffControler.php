@@ -41,6 +41,20 @@ class StaffControler extends Controller
 
     public function edit(staff_ $staff)
     {
-        return view('staff.edit', compact('staff'));
+        return view('staff.edit',['staff'=>$staff]);
+    }
+
+    public function update(staff_ $staff ,Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'position' => 'required',
+            'phone' => 'required|numeric',
+        ]);    
+        
+        $staff -> update($data);
+
+        return redirect(route('staff.index'))->with('success','Staff updated successfully');
     }
 }
