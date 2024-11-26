@@ -32,10 +32,13 @@
                                 @error('position') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="mb-3">
-                                <label>Phone</label>
-                                <input type="number" name="phone" class="form-control" max=10 />
-                                @error('phone') <span class="text-danger">{{ $message }}</span> @enderror
-                            </div>
+    <label>Phone</label>
+    <input type="text" name="phone" class="form-control" maxlength="10" pattern="\d{10}" title="Phone number must be 10 digits" />
+    @error('phone') 
+        <span class="text-danger">{{ $message }}</span> 
+    @enderror
+</div>
+
                            
                             
                             <div class="mb-3">
