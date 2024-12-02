@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StaffControler;
 use App\Http\Controllers\TaskControler;
+use App\Http\Controllers\CustomAuthController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,5 +22,8 @@ Route::post('/task', [TaskControler::class, 'store'])->name('task.store');
 Route::get('/task/{task}/edit', [TaskControler::class, 'edit'])->name('task.edit');
 Route::put('/task/{task}/update', [TaskControler::class, 'update'])->name('task.update');
 Route::delete('/task/{task}/destroy', [TaskControler::class, 'destroy'])->name('task.destroy');
+
+Route::get('/login', [CustomAuthController::class, 'login']);
+Route::get('/register', [CustomAuthController::class, 'registration']);
 
 
