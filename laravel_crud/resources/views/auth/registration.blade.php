@@ -120,7 +120,7 @@
                     </form>
 
                     <div class="mt-4 text-center">
-                        <p class="text-muted">Already have an account? <a href="#" class="text-primary">Sign in</a></p>
+                        <p class="text-muted">Already have an account? <a href="/login" class="text-primary">Sign in</a></p>
                     </div>
                 </div>
             </div>
