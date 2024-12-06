@@ -72,46 +72,72 @@
     </style>
 </head>
 <body>
-    <!-- Previous body content remains the same -->
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="registration-card">
                     <h2 class="mb-4 text-center">Create Account</h2>
-                    <!-- Rest of the form content remains the same -->
-                    <form class="needs-validation" novalidate>
+                    <form action="{{ route('register-user') }}" method="POST" class="needs-validation" novalidate>
+                        @csrf
+                        
+                        @if(Session::has('success'))
+                        <div class="alert alert-success">{{Session::get('success')}}</div>
+                        @endif
+                        @if(Session::has('fail'))
+                        <div class="alert alert-danger">{{Session::get('fail')}}</div>
+                        @endif
+
                         <div class="mb-3 form-floating">
-                            <input type="text" class="form-control" id="name" placeholder="John Doe" required>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" 
+                                   id="name" name="name" placeholder="John Doe" required 
+                                   value="{{ old('name') }}">
                             <label for="name">Full Name</label>
-                            <div class="invalid-feedback">Please enter your full name.</div>
+                            @error('name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3 form-floating">
-                            <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" 
+                                   id="email" name="email" placeholder="name@example.com" required 
+                                   value="{{ old('email') }}">
                             <label for="email">Email Address</label>
-                            <div class="invalid-feedback">Please enter a valid email address.</div>
+                            @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3 form-floating">
-                            <input type="text" class="form-control" id="address" placeholder="Your address" required>
+                            <input type="text" class="form-control @error('address') is-invalid @enderror" 
+                                   id="address" name="address" placeholder="Your address" required 
+                                   value="{{ old('address') }}">
                             <label for="address">Address</label>
-                            <div class="invalid-feedback">Please enter your address.</div>
+                            @error('address')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3 form-floating">
-                            <input type="tel" class="form-control" id="phone" placeholder="Phone number" pattern="[0-9]{10}" required>
+                            <input type="tel" class="form-control @error('phone') is-invalid @enderror" 
+                                   id="phone" name="phone" placeholder="Phone number" 
+                                   pattern="[0-9]{10}" required value="{{ old('phone') }}">
                             <label for="phone">Phone Number</label>
-                            <div class="invalid-feedback">Please enter a valid 10-digit phone number.</div>
+                            @error('phone')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-4 form-floating position-relative">
-                            <input type="password" class="form-control" id="password" placeholder="Password" required>
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" 
+                                   id="password" name="password" placeholder="Password" required>
                             <label for="password">Password</label>
                             <i class="fas fa-eye password-toggle" id="togglePassword"></i>
                             <div class="progress">
                                 <div class="progress-bar" role="progressbar" style="width: 0%"></div>
                             </div>
-                            <div class="invalid-feedback">Password must be at least 8 characters.</div>
+                            @error('password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <button class="btn btn-primary w-100 btn-register" type="submit">
@@ -120,7 +146,7 @@
                     </form>
 
                     <div class="mt-4 text-center">
-                        <p class="text-muted">Already have an account? <a href="/login" class="text-primary">Sign in</a></p>
+                        <p class="text-muted">Already have an account? <a href="{{ route('login') }}" class="text-primary">Sign in</a></p>
                     </div>
                 </div>
             </div>
@@ -129,15 +155,23 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Previous JavaScript remains the same
-        document.querySelector('form').addEventListener('submit', function(event) {
-            if (!this.checkValidity()) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            this.classList.add('was-validated');
-        });
+        // Form validation
+        (function() {
+            'use strict'
+            var forms = document.querySelectorAll('.needs-validation')
+            Array.prototype.slice.call(forms)
+                .forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
 
+        // Password toggle
         document.getElementById('togglePassword').addEventListener('click', function() {
             const password = document.getElementById('password');
             const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
@@ -146,6 +180,7 @@
             this.classList.toggle('fa-eye-slash');
         });
 
+        // Password strength meter
         document.getElementById('password').addEventListener('input', function() {
             const strength = calculatePasswordStrength(this.value);
             const progressBar = document.querySelector('.progress-bar');

@@ -79,7 +79,7 @@
                 <div class="registration-card">
                     <h2 class="mb-4 text-center">Create Account</h2>
                     <!-- Rest of the form content remains the same -->
-                    <form class="needs-validation" novalidate>
+                    <form class="needs-validation">
                         
                         <div class="mb-3 form-floating">
                             <input type="email" class="form-control" id="email" placeholder="name@example.com" required>

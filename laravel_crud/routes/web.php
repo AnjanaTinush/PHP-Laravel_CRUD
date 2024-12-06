@@ -23,7 +23,8 @@ Route::get('/task/{task}/edit', [TaskControler::class, 'edit'])->name('task.edit
 Route::put('/task/{task}/update', [TaskControler::class, 'update'])->name('task.update');
 Route::delete('/task/{task}/destroy', [TaskControler::class, 'destroy'])->name('task.destroy');
 
-Route::get('/login', [CustomAuthController::class, 'login']);
-Route::get('/register', [CustomAuthController::class, 'registration']);
+Route::get('/login', [CustomAuthController::class, 'login'])->name('login');
+Route::get('/register', [CustomAuthController::class, 'registration'])->name('registration');
+Route::post('/register-user', [CustomAuthController::class, 'registerUser'])->name('register-user');
 
 
