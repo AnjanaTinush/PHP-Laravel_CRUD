@@ -128,10 +128,10 @@
                         </div>
 
                         <div class="mb-4 form-floating position-relative">
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" 
-                                   id="password" name="password" placeholder="Password" required>
+                            <input type="password" class="form-control " 
+                                   name="password" placeholder="Password" required>
                             <label for="password">Password</label>
-                            <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                            <i class="fas fa-eye password-toggle" ></i>
                             <div class="progress">
                                 <div class="progress-bar" role="progressbar" style="width: 0%"></div>
                             </div>
@@ -171,7 +171,7 @@
                 })
         })()
 
-        // Password toggle
+        // Password toggle  id="togglePassword" @error('password') is-invalid @enderror  id="password"
         document.getElementById('togglePassword').addEventListener('click', function() {
             const password = document.getElementById('password');
             const type = password.getAttribute('type') === 'password' ? 'text' : 'password';

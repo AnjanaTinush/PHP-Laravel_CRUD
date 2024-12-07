@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Registration</title>
+    <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -77,28 +77,44 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="registration-card">
-                    <h2 class="mb-4 text-center">Create Account</h2>
+                    <h2 class="mb-4 text-center">Login</h2>
                     <!-- Rest of the form content remains the same -->
-                    <form class="needs-validation">
-                        
+                    <form action="{{ route('login-user') }}" method="post" class="needs-validation">
+                        @csrf
+                        @if(Session::has('success'))
+                        <div class="alert alert-success">{{Session::get('success')}}</div>
+                        @endif
+                        @if(Session::has('fail'))
+                        <div class="alert alert-danger">{{Session::get('fail')}}</div>
+                        @endif
+
                         <div class="mb-3 form-floating">
-                            <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+                            <input type="email" 
+                                   name="email" 
+                                   class="form-control @error('email') is-invalid @enderror" 
+                                   id="email" 
+                                   placeholder="name@example.com" 
+                                   value="{{ old('email') }}">
                             <label for="email">Email Address</label>
-                            <div class="invalid-feedback">Please enter a valid email address.</div>
+                            @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
-                       
-
-                        
-
                         <div class="mb-4 form-floating position-relative">
-                            <input type="password" class="form-control" id="password" placeholder="Password" required>
+                            <input type="password" 
+                                   name="password" 
+                                   class="form-control @error('password') is-invalid @enderror" 
+                                   id="password" 
+                                   placeholder="Password">
                             <label for="password">Password</label>
                             <i class="fas fa-eye password-toggle" id="togglePassword"></i>
                             <div class="progress">
                                 <div class="progress-bar" role="progressbar" style="width: 0%"></div>
                             </div>
-                            <div class="invalid-feedback">Password must be at least 8 characters.</div>
+                            @error('password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <button class="btn btn-primary w-100 btn-register" type="submit">
@@ -107,7 +123,7 @@
                     </form>
 
                     <div class="mt-4 text-center">
-                        <p class="text-muted">You are the new User? <a href="/register" class="text-primary">Sign up</a></p>
+                        <p class="text-muted">New User? <a href="{{ route('register') }}" class="text-primary">Sign up</a></p>
                     </div>
                 </div>
             </div>
