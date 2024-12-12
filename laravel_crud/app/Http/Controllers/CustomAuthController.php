@@ -102,4 +102,14 @@ class CustomAuthController extends Controller
             return redirect('welcome');
         }
     }
+
+    public function index()
+    {
+        if (Session::has('loginId')) {
+            $user = User::find(Session::get('loginId'));
+            return view('profile', compact('user'));
+        }
+        return redirect('login')->with('fail', 'You must be logged in.');
+    }
+
 }

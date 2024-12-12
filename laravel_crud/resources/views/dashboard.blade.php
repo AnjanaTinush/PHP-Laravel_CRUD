@@ -23,7 +23,7 @@
 		</a>
 		<ul class="side-menu top">
 			<li class="active">
-				<a href="#">
+				<a href="/dashboard">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
 				</a>
@@ -55,9 +55,9 @@
 
 		<ul class="side-menu">
 			<li>
-				<a href="#">
-					<i class='bx bxs-cog' ></i>
-					<span class="text">Settings</span>
+				<a href="/profile">
+					<i class='bx bxs-user-circle' ></i>
+					<span class="text">Profile</span>
 				</a>
 			</li>
 			<li>

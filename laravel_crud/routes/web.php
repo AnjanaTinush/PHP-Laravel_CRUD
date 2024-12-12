@@ -28,6 +28,7 @@ Route::post('/register-user', [CustomAuthController::class, 'registerUser'])->na
 Route::get('/logout', [CustomAuthController::class, 'logout'])->name('logout');
 
 Route::get('/dashboard', [CustomAuthController::class, 'dashboard'])->name('dashboard');
+Route::get('/profile',[CustomAuthController :: class ,'index'])->name('profile.index');
 
 
 
