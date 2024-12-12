@@ -5,9 +5,7 @@ use App\Http\Controllers\StaffControler;
 use App\Http\Controllers\TaskControler;
 use App\Http\Controllers\CustomAuthController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::get('/staff',[StaffControler :: class ,'index'])->name('staff.index');
 Route::get('/staff/create',[StaffControler :: class ,'create'])->name('staff.create');
@@ -23,11 +21,14 @@ Route::get('/task/{task}/edit', [TaskControler::class, 'edit'])->name('task.edit
 Route::put('/task/{task}/update', [TaskControler::class, 'update'])->name('task.update');
 Route::delete('/task/{task}/destroy', [TaskControler::class, 'destroy'])->name('task.destroy');
 
-Route::get('/login', [CustomAuthController::class, 'login'])->name('login');
+Route::get('/', [CustomAuthController::class, 'login'])->name('login');
 Route::post('/login-user', [CustomAuthController::class, 'loginUser'])->name('login-user');
 Route::get('/register', [CustomAuthController::class, 'registration'])->name('register');
 Route::post('/register-user', [CustomAuthController::class, 'registerUser'])->name('register-user');
 Route::get('/logout', [CustomAuthController::class, 'logout'])->name('logout');
+
+Route::get('/dashboard', [CustomAuthController::class, 'dashboard'])->name('dashboard');
+
 
 
 

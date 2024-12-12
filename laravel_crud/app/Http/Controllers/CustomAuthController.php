@@ -59,20 +59,19 @@ class CustomAuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|string',
         ]);
-
+    
         if ($validator->fails()) {
             return back()
                 ->withErrors($validator)
                 ->withInput();
         }
-
+    
         $user = User::where('email', $request->email)->first();
-
         if ($user) {
             if (Hash::check($request->password, $user->password)) {
                 $request->session()->put('loginId', $user->id);
-                // Redirect to welcome page after login
-                return redirect('/')->with('success', 'Login successful.');
+                // Change this line to redirect to dashboard instead of root
+                return redirect()->route('dashboard')->with('success', 'Login successful.');
             } else {
                 return back()
                     ->with('fail', 'Incorrect password.')
@@ -86,19 +85,21 @@ class CustomAuthController extends Controller
     }
 
     public function dashboard()
-    {
-        if (Session::has('loginId')) {
-            $user = User::find(Session::get('loginId'));
-            return view('dashboard', compact('user'));
-        }
-        return redirect('login')->with('fail', 'You must be logged in.');
+{
+    if (Session::has('loginId')) {
+        $user = User::find(Session::get('loginId'));
+        return view('dashboard', compact('user'));
     }
+    return redirect('login')->with('fail', 'You must be logged in.');
+}
+
+
 
     public function logout()
     {
         if (Session::has('loginId')) {
             Session::pull('loginId');
-            return redirect('login');
+            return redirect('welcome');
         }
     }
 }
